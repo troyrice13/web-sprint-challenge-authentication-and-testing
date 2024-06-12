@@ -1,4 +1,4 @@
-jest.setTimeout(30000); // Set timeout to 30 seconds
+jest.setTimeout(30000); 
 
 const request = require('supertest');
 const server = require('./server');
@@ -10,7 +10,7 @@ beforeAll(async () => {
 });
 
 beforeEach(async () => {
-  await db('users').truncate(); // Ensure the users table is cleared before each test
+  await db('users').truncate(); 
 });
 
 afterAll(async () => {
@@ -129,12 +129,12 @@ describe('Jokes endpoint', () => {
       password: 'password',
     });
 
-    console.log('Login Response:', loginRes.body); // Log the login response
+    console.log('Login Response:', loginRes.body); 
 
     const token = loginRes.body.token;
-    console.log('Token:', token); // Log the token for debugging
+    console.log('Token:', token); 
 
-    // Check if token is undefined and fail test early if it is
+    
     if (!token) {
       console.error('Token is undefined');
       throw new Error('Token is undefined');
@@ -142,7 +142,7 @@ describe('Jokes endpoint', () => {
 
     const jokesRes = await request(server).get('/api/jokes').set('Authorization', `Bearer ${token}`);
 
-    console.log('Jokes Response:', jokesRes.body); // Log the jokes response
+    console.log('Jokes Response:', jokesRes.body); 
 
     expect(jokesRes.status).toBe(200);
     expect(jokesRes.body).toBeInstanceOf(Array);

@@ -7,7 +7,7 @@ module.exports = (req, res, next) => {
     return res.status(401).json({ message: 'token required' });
   }
 
-  jwt.verify(token.split(' ')[1], process.env.SECRET || 'shh', (err, decoded) => {
+  jwt.verify(token.replace('Bearer ', ''), process.env.SECRET || 'shh', (err, decoded) => {
     if (err) {
       return res.status(401).json({ message: 'token invalid' });
     }
@@ -15,8 +15,6 @@ module.exports = (req, res, next) => {
     next();
   });
 };
-
-
 
   /*
     IMPLEMENT
